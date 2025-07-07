@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+    <button class="back-button" onclick="backToProducts()">Back to Products</button>
+    <h2>Added Products</h2>
+    <table border="1" id="product-table">
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Minimum Bid</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="product-list"></tbody>
+    </table>
+
+    <script>
+        function loadProducts() {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            let table = document.getElementById("product-table");
+
+            table.innerHTML = `<tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Minimum Bid</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>`;
+
+            products.forEach((product, index) => {
+                let row = table.insertRow();
+                row.innerHTML = `
+                    <td>${product.productName}</td>
+                    <td>${product.description}</td>
+                    <td>${product.minBid}</td>
+                    <td>${product.category}</td>
+                    <td><img src="${product.imageURL}" alt="Product Image" width="50"></td>
+                    <td><button onclick="removeProduct(${index})">Remove</button></td>
+                `;
+            });
+        }
+
+        function removeProduct(index) {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products.splice(index, 1); // Remove the selected product
+            localStorage.setItem("products", JSON.stringify(products)); // Update storage
+            loadProducts(); // Refresh the table
+        }
+
+        loadProducts();
+        function backToProducts() {
+            window.location.href = "items.html"; // Redirect to the products page
+        }
+         // Load products on page load
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            background-image: url('feedbackimage.webp');
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h3 {
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <button onclick="window.location.href='items.html';">Back</button>
+<div class="container">
+    <h3>Customer Feedback Form</h3>
+    <form id="feedbackForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="rating">Rating (1-5):</label>
+        <select id="rating" required>
+            <option value="">Select Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <label for="comments">Your Feedback:</label>
+        <textarea id="comments" rows="4" required></textarea>
+
+        <div class="btn-container">
+            <button type="submit">Submit Feedback</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Handle form submission
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from reloading the page
+
+        // Get input values
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const rating = document.getElementById("rating").value;
+        const comments = document.getElementById("comments").value;
+
+        // Validate inputs
+        if (name && email && rating && comments) {
+            // Get existing feedback from localStorage or create an empty array if none exists
+            let feedbackData = JSON.parse(localStorage.getItem("feedbackData")) || [];
+
+            // Add the new feedback data to the array
+            feedbackData.push({
+                name: name,
+                email: email,
+                rating: rating,
+                comments: comments
+            });
+
+            // Save updated feedback data to localStorage
+            localStorage.setItem("feedbackData", JSON.stringify(feedbackData));
+
+            // Clear the form
+            document.getElementById("feedbackForm").reset();
+
+            // Alert user and give them the option to view the report
+            alert("Feedback submitted successfully!.");
+        } else {
+            alert("Please fill in all fields.");
+        }
+    window.location.href = "2.html";
+    });
+</script>
+
+</body>
+</html>
+

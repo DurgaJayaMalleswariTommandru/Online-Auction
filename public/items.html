@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Bidding</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .category-select {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .product-image {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  </style>
+</head>
+<body> 
+    <!-- Back Button -->
+    <button onclick="window.location.href='cutomeraccount.html';">My Account</button>
+  <h3><a class="small-heading" href="myproducts.html">Add Your Products for Bidding</a></h3>
+
+  <h3><a class="small-heading" href="deleteproducts.html">Delete Your Products</a></h3>
+  <!-- Add functionality for deleting products -->
+  
+  <h3><a class="small-heading" href="feedbackform.html">Provide Feedback</a></h3>
+  <!-- Add form for providing feedback -->
+
+<select class="category-select" onchange="showCategory(this.value)">
+  <option value="all">All</option>
+  <option value="electronics">Electronics</option>
+  <option value="clothing">Clothing</option>
+  <option value="books">Books</option>
+</select>
+
+<table id="product-table">
+  <tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Minimum Bid</th>
+    <th>Current Highest Bid</th>
+    <th>Image</th>
+  </tr>
+  <tr class="electronics">
+    <td>P001</td>
+    <td>Laptop</td>
+    <td>Electronics</td>
+    <td>Brand new laptop with latest specifications</td>
+    <td>$60,000</td>
+    <td>$50,000</td>
+    <td><a href="itemdetails.html"><img src="Laptop.jpg" alt="Laptop" class="product-image"></a></td>
+  </tr>
+  <tr class="electronics">
+    <td>P002</td>
+    <td>TV</td>
+    <td>Electronics</td>
+    <td>Brand new TV with latest specifications</td>
+    <td>$80,000</td>
+    <td>$90,000</td>
+    <td><a href="itemdetail2.html"><img src="TV.avif" alt="TV" class="product-image"></a></td>
+  </tr>
+  <tr class="electronics">
+    <td>P003</td>
+    <td>Fan</td>
+    <td>Electronics</td>
+    <td>Brand new a fan</td>
+    <td>$30,000</td>
+    <td>$40,000</td>
+    <td><a href="itemdetail3.html"><img src="fan.jpeg" alt="fan" class="product-image"></a></td>
+  </tr>
+  <tr class="electronics">
+    <td>P004</td>
+    <td>Washine machine</td>
+    <td>Electronics</td>
+    <td>Brand new Washing Machine with latest specifications</td>
+    <td>$50,000</td>
+    <td>$55,000</td>
+    <td><a href="itemdetail4.html"><img src="Washing_Machine.webp" alt="Washing_Machine" class="product-image"></a></td>
+  </tr>
+  <tr class="clothing">
+    <td>P005</td>
+    <td>T-shirt</td>
+    <td>Clothing</td>
+    <td>100% cotton T-shirt, available in various colors</td>
+    <td>$2000</td>
+    <td>$2500</td>
+    <td><a href="itemdetail5.html"><img src="T-shirt.jpeg" alt="T-shirt" class="product-image"></a></td>
+  </tr>
+  <tr class="clothing">
+    <td>P006</td>
+    <td>Jeans</td>
+    <td>Clothing</td>
+    <td>Jeans available in various colors</td>
+    <td>$1000</td>
+    <td>$1500</td>
+    <td><a href="itemdetail6.html"><img src="Jeans.jpeg" alt="Jeans" class="product-image"></a></td>
+  </tr>
+  <tr class="clothing">
+    <td>P007</td>
+    <td>Saree</td>
+    <td>Clothing</td>
+    <td>Latest Sarees available in various colors</td>
+    <td>$2000</td>
+    <td>$2600</td>
+    <td><a href="itemdetail7.html"><img src="Saree.jpeg" alt="Saree" class="product-image"></a></td>
+  </tr>
+  <tr class="clothing">
+    <td>P008</td>
+    <td>Half Saree</td>
+    <td>Clothing</td>
+    <td>Latest Half Sarees available in various colors</td>
+    <td>$2500</td>
+    <td>$3000</td>
+    <td><a href="itemdetil8.html"><img src="Half_saree.webp" alt="Half_saree" class="product-image"></a></td>
+  </tr>
+  <tr class="books">
+    <td>P009</td>
+    <td>Ramayanam</td>
+    <td>Books</td>
+    <td>Bestselling fiction Ramayanam </td>
+    <td>$500</td>
+    <td>$700</td>
+    <td><a href="itemdetail9.html"><img src="Ramayanam.jpeg" alt="Ramayanam" class="product-image"></a></td>
+  </tr>
+  <tr class="books">
+    <td>P010</td>
+    <td>Mahabharatham</td>
+    <td>Books</td>
+    <td>Bestselling Mahabarat books</td>
+    <td>$400</td>
+    <td>$600</td>
+    <td><a href="itemdetail10.html"><img src="Mahabarat.jpeg" alt="Mahabarat" class="product-image"></a></td>
+  </tr>
+  <tr class="books">
+    <td>P011</td>
+    <td>Gate Book</td>
+    <td>Books</td>
+    <td>Entrance Gatebook exam</td>
+    <td>$300</td>
+    <td>$400</td>
+    <td><a href="itemdetail11.html"><img src="Gatebook.jpg" alt="Gatebook" class="product-image"></a></td>
+  </tr>
+</table>
+
+<script>
+  function showCategory(category) {
+    var tableRows = document.querySelectorAll("#product-table tr");
+    tableRows.forEach(function(row, index) {
+      if (index === 0) {
+        row.style.display = "table-row";
+      } else if (category === 'all' || row.classList.contains(category)) {
+        row.style.display = "table-row";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+
+  function loadProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+
+    let table = document.getElementById("product-table");
+
+    products.forEach(product => {
+      let row = document.createElement("tr");
+      row.classList.add(product.category);
+
+      row.innerHTML = `
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.category}</td>
+        <td>${product.description}</td>
+        <td>${product.minBid}</td>
+        <td>$0</td>
+        <td><img src="${product.imageURL}" class="product-image" alt="${product.name}"></td>
+      `;
+
+      table.appendChild(row);
+    });
+  }
+
+  window.onload = loadProducts;
+</script>
+
+
+</body>
+</html>

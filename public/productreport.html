@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .review-box { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        h2{text-align: center;}
+        .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+
+    </style>
+</head>
+<body>
+       <!-- Back Button -->
+<button class="back-button" onclick="window.location.href='sellerlogindetails.html';">Back to Page</button>
+
+    <h2>Customer Reviews</h2>
+    <div id="reviewsContainer"></div>
+    <script>
+        function displayReviews() {
+            let reviewsContainer = document.getElementById("reviewsContainer");
+            reviewsContainer.innerHTML = "";
+            let reviews = JSON.parse(localStorage.getItem("productReviews")) || [];
+
+            if (reviews.length === 0) {
+                reviewsContainer.innerHTML = "<p>No reviews yet.</p>";
+                return;
+            }
+
+            reviews.forEach(review => {
+                let reviewElement = document.createElement("div");
+                reviewElement.className = "review-box";
+                reviewElement.innerHTML = `<strong>${review.name}</strong> 
+                                           <span>(${review.date})</span>
+                                           <p>${review.review}</p>
+                                           <strong>Rating: ${review.rating}/5</strong>`;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+
+        window.onload = displayReviews;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #1a3d4c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Seller Login</h2>
+        <form onsubmit="return validateLogin(event)">
+            <input type="text" id="sellerUsername" placeholder="Enter Username">
+            <input type="password" id="sellerPassword" placeholder="Enter Password">
+            <p id="errorMessage" class="error"></p>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function validateLogin(event) {
+            event.preventDefault(); // Prevents page refresh
+
+            let username = document.getElementById("sellerUsername").value;
+            let password = document.getElementById("sellerPassword").value;
+            let errorMessage = document.getElementById("errorMessage");
+
+            if (username === "" || password === "") {
+                errorMessage.textContent = "Both fields are required!";
+                return false;
+            }
+
+            // Hardcoded login for demo (Replace with backend validation)
+            if (username === "seller" && password === "password123") {
+                alert("Login Successful!");
+                window.location.href = "seller-dashboard.html"; // Redirect after login
+            } else {
+                errorMessage.textContent = "Invalid Username or Password!";
+            }
+        }
+    </script>
+
+</body>
+</html>

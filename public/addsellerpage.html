@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+        h3 {
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .required {
+            color: red;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .save-btn {
+            background-color: green;
+        }
+        .reset-btn {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+ <!-- Back Button -->
+<button class="back-button" onclick="window.location.href='adminlogindetail.html';">Back to Page</button>
+<div class="container">
+    <h3>Adding Seller Details</h3>
+    <form id="sellerForm">
+        <!-- Email Field -->
+        <label for="email">Seller Email <span class="required">*</span></label>
+        <input type="email" id="email" required>
+        <p class="error" id="emailError"></p>
+
+        <!-- Password Field -->
+        <label for="password">Password <span class="required">*</span></label>
+        <input type="password" id="password" required>
+        <p class="error" id="passwordError"></p>
+
+        <!-- Confirm Password Field -->
+        <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+        <input type="password" id="confirmPassword" required>
+        <p class="error" id="confirmPasswordError"></p>
+
+        <h3>Seller Details</h3>
+
+        <!-- Other Fields -->
+        <label for="name">Seller Name <span class="required">*</span></label>
+        <input type="text" id="name" required>
+        <p class="error" id="nameError"></p>
+
+        <label for="contact">Seller Contact Number <span class="required">*</span></label>
+        <input type="tel" id="contact" required>
+        <p class="error" id="contactError"></p>
+        <label for="city">Seller City <span class="required">*</span></label>
+        <select id="city" required>
+            <option value="">Please Select</option>
+            <option>New York</option>
+            <option>Los Angeles</option>
+            <option>Chicago</option>
+        </select>
+        <p class="error" id="cityError"></p>
+
+        <label for="state">Seller State <span class="required">*</span></label>
+        <select id="state" required>
+            <option value="">Please Select</option>
+            <option>California</option>
+            <option>Texas</option>
+            <option>Florida</option>
+        </select>
+        <p class="error" id="stateError"></p>
+
+        <label for="country">Seller Country <span class="required">*</span></label>
+        <select id="country" required>
+            <option value="">Please Select</option>
+            <option>USA</option>
+            <option>Canada</option>
+            <option>UK</option>
+        </select>
+        <p class="error" id="countryError"></p>
+
+        <label for="address">Seller Address <span class="required">*</span></label>
+        <input type="text" id="address" required>
+        <p class="error" id="addressError"></p>
+        <div class="btn-container">
+            <button type="submit" class="save-btn">Save Details</button>
+            <button type="reset" class="reset-btn">Reset Form</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("sellerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        let isValid = true;
+
+        // Email validation
+        let email = document.getElementById("email").value;
+        let emailError = document.getElementById("emailError");
+        if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+            emailError.textContent = "Invalid email format";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        // Password validation
+        let password = document.getElementById("password").value;
+        let passwordError = document.getElementById("passwordError");
+        if (password.length < 6) {
+            passwordError.textContent = "Password must be at least 6 characters";
+            isValid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+
+        // Confirm Password validation
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let confirmPasswordError = document.getElementById("confirmPasswordError");
+        if (confirmPassword !== password) {
+            confirmPasswordError.textContent = "Passwords do not match";
+            isValid = false;
+        } else {
+            confirmPasswordError.textContent = "";
+        }
+
+        // Contact validation (10 digits)
+        let contact = document.getElementById("contact").value;
+        let contactError = document.getElementById("contactError");
+        if (!contact.match(/^\d{10}$/)) {
+            contactError.textContent = "Invalid phone number (10 digits required)";
+            isValid = false;
+        } else {
+            contactError.textContent = "";
+        }
+
+        // Address validation
+        let address = document.getElementById("address").value;
+        let addressError = document.getElementById("addressError");
+        if (address.trim() === "") {
+            addressError.textContent = "Address cannot be empty";
+            isValid = false;
+        } else {
+            addressError.textContent = "";
+        }
+
+        // Dropdowns validation
+        let fields = ["city", "state", "country"];
+        fields.forEach(field => {
+            let value = document.getElementById(field).value;
+            let error = document.getElementById(field + "Error");
+            if (value === "") {
+                error.textContent = "This field is required";
+                isValid = false;
+            } else {
+                error.textContent = "";
+            }
+        });
+
+        if (isValid) {
+            alert("Form submitted successfully!");
+        }
+    });
+</script>
+
+</body>
+</html>

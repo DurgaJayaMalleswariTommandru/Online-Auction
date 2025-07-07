@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splash Screen</title>
+    <style>
+        /* Splash screen style */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color:#282c34;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        /* Home page style */
+        .home-page {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            color: #333;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .visible {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Splash Screen Content -->
+    <div id="splash-screen">
+        <h1>Welcome to My App!</h1>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Home Page Content (hidden initially) -->
+    <div id="home-page" class="home-page">
+        <h1>Welcome to the Home Page!</h1>
+    </div>
+
+    <script>
+        // Show Home Page after 5 seconds
+        setTimeout(function() {
+            document.getElementById('splash-screen').style.display = 'none';  // Hide splash screen
+            window.location.href = "2.html";    // Show home page
+        }, 5000);  // 5000 milliseconds = 5 seconds
+    </script>
+</body>
+</html>

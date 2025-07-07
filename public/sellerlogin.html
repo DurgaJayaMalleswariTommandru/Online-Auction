@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seller Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      background-image: url('sellerloginimg.png');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+    .login-container {
+      background-color: #1a3d4c;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back Button -->
+  <button class="back-button" onclick="window.location.href='2.html';">Back to Page</button>
+
+  <div class="login-container">
+    <h2>Seller Login</h2>
+    <form onsubmit="return validateSellerLogin(event)">
+      <input type="text" id="sellerName" placeholder="Enter Seller Name" />
+      <input type="password" id="sellerPassword" placeholder="Enter Password" />
+      <p id="sellerErrorMessage" class="error"></p>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function validateSellerLogin(event) {
+      event.preventDefault();
+
+      let name = document.getElementById("sellerName").value;
+      let password = document.getElementById("sellerPassword").value;
+      let errorMessage = document.getElementById("sellerErrorMessage");
+
+      if (name === "" || password === "") {
+        errorMessage.textContent = "Both fields are required!";
+        return false;
+      }
+
+      // Check for hardcoded credentials
+      if (name === "customer" && password === "password123") {
+        // Store in localStorage
+        localStorage.setItem("sellerName", name);
+        localStorage.setItem("sellerPassword", password);
+
+        alert("Login Successful!");
+        window.location.assign("sellerlogindetails.html");
+      } else {
+        errorMessage.textContent = "Invalid Name or Password!";
+      }
+    }
+  </script>
+
+</body>
+</html>
