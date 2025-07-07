@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <button onclick="window.location.href='customerlogin.html';">Back</button>
+    <h2>Customer Registration</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Mobile:</label>
+    <input type="text" id="mobile"><br><br>
+
+    <label>Email:</label>
+    <input type="email" id="email"><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="password"><br><br>
+
+    <label>City:</label>
+    <input type="text" id="city"><br><br>
+
+    <label>State:</label>
+    <input type="text" id="state"><br><br>
+
+    <label>Pincode:</label>
+    <input type="text" id="pincode"><br><br>
+
+    <label>Full Address:</label>
+    <textarea id="address" rows="3"></textarea><br><br>
+
+    <button onclick="registerUser()">Register</button>
+    <p class="error" id="errorMsg"></p>
+
+    <script>
+        async function registerUser() {
+          const name = document.getElementById("name").value.trim();
+          const mobile = document.getElementById("mobile").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const city = document.getElementById("city").value.trim();
+          const state = document.getElementById("state").value.trim();
+          const pincode = document.getElementById("pincode").value.trim();
+          const address = document.getElementById("address").value.trim();
+          const errorMsg = document.getElementById("errorMsg");
+      
+          errorMsg.innerText = "";
+      
+          if (!name || !mobile || !email || !password || !city || !state || !pincode || !address) {
+            errorMsg.innerText = "All fields are required!";
+            return;
+          }
+      
+          const userData = { name, mobile, email, password, city, state, pincode, address };
+      
+          try {
+            const response = await fetch("http://localhost:5000/api/users/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(userData)
+            });
+      
+            const data = await response.json();
+      
+            if (response.ok) {
+              alert("Registration Successful! Redirecting to My Account...");
+              window.location.href = "customerlogin.html";
+            } else {
+              errorMsg.innerText = data.message || "Registration failed!";
+            }
+          } catch (error) {
+            console.error("Error during registration:", error);
+            errorMsg.innerText = "Server error. Please try again.";
+          }
+        }
+      </script>
+      
+</body>
+</html>

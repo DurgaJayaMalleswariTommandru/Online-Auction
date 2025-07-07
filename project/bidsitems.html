@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place a Product Bid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h3 {
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Place a Product Bid</h3>
+    <form id="bidForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" required>
+
+        <label for="bidderName">Bidder Name:</label>
+        <input type="text" id="bidderName" required>
+
+        <label for="bidAmount">Bid Amount (USD):</label>
+        <input type="number" id="bidAmount" required>
+
+        <div class="btn-container">
+            <button type="submit">Place Bid</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("bidForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload on form submit
+
+        // Get form data
+        const productName = document.getElementById("productName").value;
+        const bidderName = document.getElementById("bidderName").value;
+        const bidAmount = document.getElementById("bidAmount").value;
+
+        // Validate inputs
+        if (productName && bidderName && bidAmount) {
+            // Get existing bids from localStorage or create an empty array if none exist
+            let productBids = JSON.parse(localStorage.getItem("productBids")) || [];
+
+            // Add the new bid data to the array
+            productBids.push({
+                productName: productName,
+                bidderName: bidderName,
+                bidAmount: bidAmount
+            });
+
+            // Save updated bids to localStorage
+            localStorage.setItem("productBids", JSON.stringify(productBids));
+
+            // Clear the form
+            document.getElementById("bidForm").reset();
+
+            // Inform the user that the bid was placed successfully
+            alert("Bid placed successfully!");
+        } else {
+            alert("Please fill in all fields.");
+        }
+    });
+</script>
+
+</body>
+</html>

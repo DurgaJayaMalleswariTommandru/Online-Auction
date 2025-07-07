@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h3 {
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+  <!-- Back Button -->
+<button class="back-button" onclick="window.location.href='adminlogindetail.html';">Back to Page</button>
+<div class="container">
+    <h3>Customer Feedback Report</h3>
+    <table id="feedbackTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Feedback data will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Retrieve feedback data from localStorage
+    let feedbackData = JSON.parse(localStorage.getItem("feedbackData")) || [];
+
+    // Get the table body
+    const tableBody = document.getElementById("feedbackTable").getElementsByTagName("tbody")[0];
+
+    // Check if data exists
+    if (feedbackData.length > 0) {
+        // Add each feedback entry as a new row in the table
+        feedbackData.forEach(feedback => {
+            const newRow = tableBody.insertRow();
+
+            const cellName = newRow.insertCell(0);
+            const cellEmail = newRow.insertCell(1);
+            const cellRating = newRow.insertCell(2);
+            const cellComments = newRow.insertCell(3);
+
+            cellName.textContent = feedback.name;
+            cellEmail.textContent = feedback.email;
+            cellRating.textContent = feedback.rating;
+            cellComments.textContent = feedback.comments;
+        });
+    } else {
+        const noDataRow = tableBody.insertRow();
+        const noDataCell = noDataRow.insertCell(0);
+        noDataCell.colSpan = 4;
+        noDataCell.textContent = "No feedback data available.";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Auction System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #1a3d4c;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 0;
+            font-size: 12px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            color: #1a3d4c;
+        }
+     /* Home Section Container */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+}
+
+/* Home Content Styling */
+.home-content {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.home-content h2, 
+.home-content h3, 
+.home-content h4 {
+    color: #1a3d4c;
+    margin-bottom: 10px;
+}
+
+/* Paragraph Styling */
+.home-content p {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Lists Styling */
+.home-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.home-content ul li {
+    font-size: 16px;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.home-content ul li::before {
+    content: "✔"; /* Checkmark before each item */
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Ordered List Styling */
+.home-content ol {
+    padding-left: 20px;
+}
+
+.home-content ol li {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+/* Call to Action */
+.home-content p:last-child {
+    font-weight: bold;
+    font-size: 18px;
+    color: #d9534f;
+    text-align: center;
+}
+
+
+.image-container {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+        .about-container {
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+            justify-content: space-between;
+            text-align: left;
+        }
+        .about-container .text {
+            width: 65%;
+        }
+        .about-container .images {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .about-container img {
+            width: 400px;  /* Set a fixed width */
+            height: 270px; /* Set a fixed height */
+            object-fit: cover; /* Ensure proper image scaling */
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .login-btn {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #1a3d4c;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+#login {
+    background-image: url('mainimage.png');
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 160px; /* Adds padding around the content */
+    color: white; /* Ensures the text is visible against the background */
+    text-align: center; /* Centers the text */
+    border-radius: 18px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+#register{
+    background-image: url('auction.jpg');
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 160px; /* Adds padding around the content */
+    color: white; /* Ensures the text is visible against the background */
+    text-align: center; /* Centers the text */
+    border-radius: 18px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+#contact{
+    background-image: url('contactimage.webp');
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 160px; /* Adds padding around the content */
+    color: white; /* Ensures the text is visible against the background */
+    text-align: center; /* Centers the text */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+
+.login-btn:hover {
+    background-color: #14303c;
+}
+#login h2 {
+    text-align: center;
+}
+#register h2 {
+    text-align: center;
+}
+
+
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>ONLINE AUCTION SYSTEM</h1>
+        <p>A complete solution for managing online auctions, selling products and bids</p>
+    </div>
+    <div class="navbar">
+        <a onclick="showSection('home')">HOME</a>
+        <a onclick="showSection('about')">ABOUT US</a>
+        <a onclick="showSection('faq')">FAQ</a>
+        <a onclick="showSection('login')">LOGIN</a>
+        <a onclick="showSection('register')">REGISTER</a>
+        <a onclick="showSection('contact')">CONTACT US</a>
+    </div>
+    <div class="content">
+        <div id="home" class="section active">
+            <div class="home-container">
+                <h2>Welcome to Online Auction System</h2>
+                <p>Experience the <strong>thrill of online bidding</strong> like never before! Our <strong>Online Auction System</strong> offers a <strong>fast, secure, and transparent</strong> way to <strong>buy and sell valuable items</strong> with ease.</p>
+                <h3>Discover a World of Unique Finds</h3>
+                <p>From <strong>rare antiques and fine art</strong> to <strong>high-tech gadgets and exclusive collectibles</strong>, our platform connects <strong>buyers and sellers worldwide</strong>. Explore an ever-growing catalog of <strong>diverse and valuable products</strong> available for auction at competitive prices.</p>
+                <ul>
+                    <li>💎 <strong>Collectibles & Antiques</strong> – Discover vintage treasures and rare finds.</li>
+                    <li>📱 <strong>Electronics & Gadgets</strong> – Bid on the latest tech at unbeatable prices.</li>
+                    <li>🛍️ <strong>Luxury Goods</strong> – Exclusive watches, handbags, and designer items.</li>
+                    <li>🚗 <strong>Automobiles & More</strong> – Cars, bikes, and vehicle accessories up for auction.</li>
+                </ul>
+                <h3>Why Choose Our Online Auction System?</h3>
+                <ul>
+                    <li>🔥 <strong>Exciting Real-Time Bidding</strong> – Engage in live auctions and compete for the best deals.</li>
+                    <li>🔍 <strong>Transparent Pricing</strong> – No hidden fees, ensuring fair competition.</li>
+                    <li>✅ <strong>Verified Sellers & Buyers</strong> – Ensuring a secure marketplace with trusted participants.</li>
+                    <li>🚀 <strong>AI-Powered Fraud Detection</strong> – Keeping transactions safe and trustworthy.</li>
+                </ul>
+                <h3>Seamless Buying & Selling Experience</h3>
+                <h4>For Buyers:</h4>
+                <ul>
+                    <li>Browse thousands of auction listings.</li>
+                    <li>Get real-time notifications on bids and outbids.</li>
+                    <li>Set a maximum bid limit, and let our system bid for you automatically.</li>
+                    <li>Secure checkout process with multiple payment options.</li>
+                </ul>
+                <h4>For Sellers:</h4>
+                <ul>
+                    <li>List your products with ease using our simple interface.</li>
+                    <li>Set reserve prices to ensure you get the best deal.</li>
+                    <li>Reach a global audience and maximize your earnings.</li>
+                    <li>Get fast payouts after a successful auction.</li>
+                </ul>
+                <h3>How It Works?</h3>
+                <ol>
+                    <li>Sign Up & Browse Auctions – Create an account and explore live listings.</li>
+                    <li>Place Your Bids – Bid in real-time and set auto-bidding limits.</li>
+                    <li>Win & Pay Securely – Complete your purchase with confidence.</li>
+                    <li>Receive Your Item – Get your winning product delivered hassle-free.</li>
+                </ol>
+                <h3>Join Our Growing Community</h3>
+                <p>With thousands of satisfied users, our Online Auction System is the preferred choice for those looking to buy and sell online with confidence. Our dedicated support team is available 24/7 to assist you every step of the way.</p>
+                <p>Don't miss out on amazing deals and exclusive auctions! Sign up today and start bidding, selling, and winning in a marketplace designed for success. 🚀</p>
+            </div>
+        </div>
+        <div id="about" class="section">
+            <h2>About Us – Redefining the Future of Online Auctions</h2>
+            <div class="about-container">
+                <div class="text">
+                    <p>Welcome to <b>Online Auction System</b>, a next-generation digital marketplace designed to bring buyers and sellers together in a seamless, secure, and dynamic environment. Whether you're searching for rare collectibles, high-value antiques, or cutting-edge technology, our platform ensures a fair and thrilling auction experience for everyone.</p>
+                    
+                    <h3>Our Vision – A Marketplace Without Limits</h3>
+                    <p>At Online Auction System, we believe that online auctions should be <b>exciting, transparent, and rewarding</b> for all participants. Our platform is built to <b>connect people worldwide</b>, making it easier than ever to buy and sell unique items at the best possible prices.</p>
+                    <p>Gone are the days of traditional, time-consuming auctions—our digital marketplace provides <b>real-time bidding, automated auction management, and secure transactions</b>, ensuring that every auction is smooth and hassle-free.</p>
+        
+                    <h3>Why Choose Online Auction System?</h3>
+                    <ul>
+                        <li><b>🌟 A Seamless User Experience:</b> Our platform is designed for ease of use, making bidding and selling effortless.</li>
+                        <li><b>🔒 100% Secure & Transparent Transactions:</b> We implement advanced encryption, AI fraud detection, and escrow payments to ensure safety.</li>
+                        <li><b>🌍 Global Marketplace:</b> Buy and sell exclusive items from anywhere in the world.</li>
+                        <li><b>🏆 Competitive & Fair Bidding System:</b> Real-time bidding updates, proxy bidding, and no hidden fees.</li>
+                    </ul>
+        
+                    <h3>How We Empower Sellers</h3>
+                    <ul>
+                        <li>✅ Create visually appealing listings with high-quality images and descriptions.</li>
+                        <li>✅ Set reserve prices to get fair value for your products.</li>
+                        <li>✅ Promote your listings to reach the right buyers.</li>
+                        <li>✅ Manage your inventory effortlessly.</li>
+                    </ul>
+        
+                    <h3>What Makes Us Different?</h3>
+                    <ul>
+                        <li>🔹 24/7 Customer Support – Our dedicated team is always here to assist.</li>
+                        <li>🔹 Live Auction Events – Participate in exclusive auctions with verified sellers.</li>
+                        <li>🔹 AI-Powered Recommendations – Get personalized item suggestions.</li>
+                        <li>🔹 Instant Payouts for Sellers – Receive payments quickly.</li>
+                    </ul>
+        
+                    <h3>The Future of Online Auctions is Here!</h3>
+                    <p>Our journey has just begun, and we are committed to continuously enhancing our platform with <b>cutting-edge technologies</b> like blockchain security, AI-based fraud detection, and immersive live-streamed auctions.</p>
+                    <p><b>Join us today</b> and become a part of the revolution. Start <b>bidding, selling, and winning</b> with confidence at Online Auction System! 🚀</p>
+                </div>
+                <div class="images">
+                    <img src="C:\Users\Durga\OneDrive\Attachments\project\auction.jpg" alt="Our Mission">
+                    <img src="C:\Users\Durga\OneDrive\Attachments\project\people.png" alt="Our Vision">
+                    <img src="C:\Users\Durga\OneDrive\Attachments\project\bid1.jpeg" alt="Our Team">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="faq" class="section active">
+                <h2>FAQ</h2>
+                <h3>1. What is an Online Auction?</h3>
+                <p>An online auction is a virtual marketplace where buyers place bids on items, and the highest bidder wins. It operates similarly to a traditional auction but is conducted entirely online.</p>
+                
+                <h3>2. How do I set up an online bidding account?</h3>
+                <p>To start bidding, follow these steps:</p>
+                <ul>
+                    <li>Click on the Register button on the homepage.</li>
+                    <li>Fill in your personal details and verify your email.</li>
+                    <li>Once registered, you can start browsing and bidding on auctions.</li>
+                </ul>
+                
+                <h3>3. How do I bid?</h3>
+                <ul>
+                    <li>Select the item you want to bid on.</li>
+                    <li>Enter your bid amount and confirm.</li>
+                    <li>If you’re outbid, you will receive a notification to place a higher bid.</li>
+                    <li>The highest bidder at the end of the auction wins the item.</li>
+                </ul>
+                
+                <h3>4. How much should I bid?</h3>
+                <p>You should bid an amount you’re comfortable with. Consider the item’s value, demand, and your budget before placing a bid. Some auctions have a minimum bid amount or a reserve price that must be met.</p>
+                
+                <h3>5. Is there a registration fee to join?</h3>
+                <p>No, registration is completely free. You only pay when you win an auction or if you list items for sale.</p>
+                
+                <h3>6. How do I know if I’ve won an auction?</h3>
+                <p>You will receive an email notification and an update in your account dashboard if you win an auction.</p>
+                
+                <h3>7. What payment methods do you accept?</h3>
+                <p>We accept credit/debit cards, PayPal, and online banking for secure and hassle-free payments.</p>
+                
+                <h3>8. Can I cancel a bid once placed?</h3>
+                <p>No, bids are final. Please bid responsibly, as withdrawing a bid can affect the integrity of the auction process.</p>
+            </div>
+        </div>
+        <div id="login" class="section">
+            <h2>Login to your account</h2>
+            <a href="adminlogin.html"><button class="login-btn">Admin Login</button></a>
+            <a href="sellerlogin.html"><button class="login-btn">Seller Login</button></a>
+            <a href="customerlogin.html"><button class="login-btn">Customer Login</button></a>
+        </div>
+        
+        <div id="register" class="section">
+            <h2>Register to your account</h2>
+            <a href="sellerregistration.html"><button class="login-btn">Seller Registration </button></a>
+            <a href="customerregistration.html"><button class="login-btn">Customer Registration</button></a>
+        </div>
+        <div id="contact" class="section">
+            <a href="contact.html"><button class="login-btn">Contact Us </button></a>
+        </div>
+    </div>
+</body>
+</html>

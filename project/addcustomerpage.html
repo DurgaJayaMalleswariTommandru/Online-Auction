@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px;
+            width: 48%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .reset-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+       <!-- Back Button -->
+<button class="back-button" onclick="window.location.href='adminlogindetail.html';">Back to Page</button>
+    <div class="container">
+        <h2>Customer Details</h2>
+
+        <h3>Personal Details</h3>
+        <form id="customerForm">
+            <label>Name (*)</label>
+            <input type="text" id="name">
+            <p class="error" id="errorName"></p>
+
+            <label>Mobile (*)</label>
+            <input type="text" id="mobile">
+            <p class="error" id="errorMobile"></p>
+
+            <label>Email (*)</label>
+            <input type="email" id="email">
+            <p class="error" id="errorEmail"></p>
+
+            <h3>Address Details</h3>
+
+            <label>City (*)</label>
+            <input type="text" id="city">
+            <p class="error" id="errorCity"></p>
+
+            <label>State (*)</label>
+            <input type="text" id="state">
+            <p class="error" id="errorState"></p>
+
+            <label>Pincode (*)</label>
+            <input type="text" id="pincode">
+            <p class="error" id="errorPincode"></p>
+
+            <label>Full Address (*)</label>
+            <input type="text" id="fullAddress">
+            <p class="error" id="errorFullAddress"></p>
+
+            <div class="buttons">
+                <button type="button" class="save-btn" onclick="saveDetails()">Save Details</button>
+                <button type="reset" class="reset-btn" onclick="resetForm()">Reset Form</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function saveDetails() {
+            // Get input values
+            let name = document.getElementById("name").value;
+            let mobile = document.getElementById("mobile").value;
+            let email = document.getElementById("email").value;
+            let city = document.getElementById("city").value;
+            let state = document.getElementById("state").value;
+            let pincode = document.getElementById("pincode").value;
+            let fullAddress = document.getElementById("fullAddress").value;
+
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll(".error").forEach(error => error.textContent = "");
+
+            // Validation
+            if (name === "") {
+                document.getElementById("errorName").textContent = "Name is required!";
+                isValid = false;
+            }
+            if (mobile === "") {
+                document.getElementById("errorMobile").textContent = "Mobile number is required!";
+                isValid = false;
+            } else if (!/^\d{10}$/.test(mobile)) {
+                document.getElementById("errorMobile").textContent = "Enter a valid 10-digit number!";
+                isValid = false;
+            }
+            if (email === "") {
+                document.getElementById("errorEmail").textContent = "Email is required!";
+                isValid = false;
+            }
+            if (city === "") {
+                document.getElementById("errorCity").textContent = "City is required!";
+                isValid = false;
+            }
+            if (state === "") {
+                document.getElementById("errorState").textContent = "State is required!";
+                isValid = false;
+            }
+            if (pincode === "") {
+                document.getElementById("errorPincode").textContent = "Pincode is required!";
+                isValid = false;
+            } else if (!/^\d{6}$/.test(pincode)) {
+                document.getElementById("errorPincode").textContent = "Enter a valid 6-digit pincode!";
+                isValid = false;
+            }
+            if (fullAddress === "") {
+                document.getElementById("errorFullAddress").textContent = "Full Address is required!";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Customer Details Saved Successfully!");
+                document.getElementById("customerForm").reset(); // Reset form after saving
+            }
+        }
+
+        function resetForm() {
+            document.getElementById("customerForm").reset();
+            document.querySelectorAll(".error").forEach(error => error.textContent = "");
+        }
+    </script>
+
+</body>
+</html>

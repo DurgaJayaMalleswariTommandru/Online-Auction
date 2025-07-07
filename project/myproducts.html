@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Auction Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        label { display: block; margin-top: 10px; text-align: left; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; }
+        button { padding: 10px; cursor: pointer; background: green; color: white; border: none; margin-top: 15px; }
+        .error { color: red; font-size: 14px; display: none; }
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="backToProducts()">Back to Products</button>
+        <h1>Add Product for Auction</h1>
+        <form id="auction-form">
+            <label>Enter Product Name</label>
+            <input type="text" id="product-name" required>
+            <p class="error" id="name-error">Please enter a valid product name.</p>
+
+            <label>Enter Product Description</label>
+            <textarea id="product-description" required></textarea>
+            <p class="error" id="desc-error">Please enter a product description.</p>
+
+            <label>Enter Minimum Bid Amount (in Rs.)</label>
+            <input type="number" id="min-bid" required>
+            <p class="error" id="bid-error">Please enter a valid bid amount.</p>
+
+            <label>Enter Auction Time (in minutes)</label>
+            <input type="number" id="auction-time" required>
+            <p class="error" id="time-error">Please enter a valid auction time.</p>
+
+            <label>Select Category</label>
+            <select id="category">
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+            </select>
+
+            <label>Upload Image</label>
+            <input type="file" id="image-upload" accept="image/*" required>
+            <p class="error" id="image-error">Please upload an image.</p>
+
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("auction-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let productName = document.getElementById("product-name").value.trim();
+            let description = document.getElementById("product-description").value.trim();
+            let minBid = document.getElementById("min-bid").value.trim();
+            let auctionTime = document.getElementById("auction-time").value.trim();
+            let category = document.getElementById("category").value;
+            let imageFile = document.getElementById("image-upload").files[0];
+
+            let isValid = true;
+
+            if (!productName) { document.getElementById("name-error").style.display = "block"; isValid = false; }
+            else { document.getElementById("name-error").style.display = "none"; }
+
+            if (!description) { document.getElementById("desc-error").style.display = "block"; isValid = false; }
+            else { document.getElementById("desc-error").style.display = "none"; }
+
+            if (!minBid || isNaN(minBid) || minBid <= 0) { document.getElementById("bid-error").style.display = "block"; isValid = false; }
+            else { document.getElementById("bid-error").style.display = "none"; }
+
+            if (!auctionTime || isNaN(auctionTime) || auctionTime <= 0) { document.getElementById("time-error").style.display = "block"; isValid = false; }
+            else { document.getElementById("time-error").style.display = "none"; }
+
+            if (!imageFile) { document.getElementById("image-error").style.display = "block"; isValid = false; }
+            else { document.getElementById("image-error").style.display = "none"; }
+
+            if (!isValid) return;
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let imageURL = event.target.result;
+
+                let product = { id: Date.now(), productName, description, minBid, auctionTime, category, imageURL };
+
+                try {
+                    let products = JSON.parse(localStorage.getItem("products")) || [];
+                    products.push(product);
+                    localStorage.setItem("products", JSON.stringify(products));
+
+                    console.log("Stored Products:", JSON.parse(localStorage.getItem("products"))); // Debugging
+                    alert("Product added successfully!");
+                    
+                } catch (error) {
+                    console.error("Error saving to localStorage:", error);
+                }
+            };
+
+            reader.readAsDataURL(imageFile);
+        });
+
+        function backToProducts() {
+            window.location.href = "items.html"; // Redirect to the products page
+        }
+    </script>
+</body>
+</html>

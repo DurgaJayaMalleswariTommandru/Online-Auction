@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 400px; margin: auto; }
+        .error { color: red; }
+        h2{text-align: center;}
+        button { padding: 10px 15px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+       <!-- Back Button -->
+       <button onclick="window.location.href='customerregistration.html';">Back</button>
+       <!-- Back Button -->
+       <button onclick="window.location.href='items.html';">Items</button>
+    <h2>My Account</h2>
+    <div class="container">
+        <p><strong>Name:</strong> <span id="displayName"></span></p>
+        <p><strong>Mobile:</strong> <span id="displayMobile"></span></p>
+        <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+        <p><strong>Password:</strong> <span id="displayPassword"></span></p>
+        <p><strong>City:</strong> <span id="displayCity"></span></p>
+        <p><strong>State:</strong> <span id="displayState"></span></p>
+        <p><strong>Pincode:</strong> <span id="displayPincode"></span></p>
+        <p><strong>Full Address:</strong> <span id="displayAddress"></span></p>
+    </div>
+
+    <h3>Edit Your Details</h3>
+    <label>Name:</label>
+    <input type="text" id="editName"><br><br>
+
+    <label>Mobile:</label>
+    <input type="text" id="editMobile"><br><br>
+
+    <label>Email:</label>
+    <input type="email" id="editEmail"><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="editPassword"><br><br>
+
+    <label>City:</label>
+    <input type="text" id="editCity"><br><br>
+
+    <label>State:</label>
+    <input type="text" id="editState"><br><br>
+
+    <label>Pincode:</label>
+    <input type="text" id="editPincode"><br><br>
+
+    <label>Full Address:</label>
+    <textarea id="editAddress" rows="3"></textarea><br><br>
+
+    <button onclick="saveDetails()">Save Details</button>
+    <button onclick="resetForm()">Reset Form</button>
+    <p class="error" id="errorMsg"></p>
+
+    <p><a href="customerregistration.html">Register a New Account</a></p>
+
+    <script>
+        function loadUserData() {
+            let userData = JSON.parse(localStorage.getItem("customerData"));
+
+            if (!userData) {
+                alert("No registered user found. Redirecting to Registration Page...");
+                window.location.href = "customerregistration.html";
+                return;
+            }
+
+            document.getElementById("displayName").innerText = userData.name;
+            document.getElementById("displayMobile").innerText = userData.mobile;
+            document.getElementById("displayEmail").innerText = userData.email;
+            document.getElementById("displayPassword").innerText = userData.password;
+            document.getElementById("displayCity").innerText = userData.city;
+            document.getElementById("displayState").innerText = userData.state;
+            document.getElementById("displayPincode").innerText = userData.pincode;
+            document.getElementById("displayAddress").innerText = userData.address;
+
+            document.getElementById("editName").value = userData.name;
+            document.getElementById("editMobile").value = userData.mobile;
+            document.getElementById("editEmail").value = userData.email;
+            document.getElementById("editPassword").value = userData.password;
+            document.getElementById("editCity").value = userData.city;
+            document.getElementById("editState").value = userData.state;
+            document.getElementById("editPincode").value = userData.pincode;
+            document.getElementById("editAddress").value = userData.address;
+        }
+
+        function saveDetails() {
+            let name = document.getElementById("editName").value.trim();
+            let mobile = document.getElementById("editMobile").value.trim();
+            let email = document.getElementById("editEmail").value.trim();
+            let password = document.getElementById("editPassword").value.trim();
+            let city = document.getElementById("editCity").value.trim();
+            let state = document.getElementById("editState").value.trim();
+            let pincode = document.getElementById("editPincode").value.trim();
+            let address = document.getElementById("editAddress").value.trim();
+
+            if (!name || !mobile || !email || !password || !city || !state || !pincode || !address) {
+                document.getElementById("errorMsg").innerText = "All fields are required!";
+                return;
+            }
+
+            let userData = { name, mobile, email, password, city, state, pincode, address };
+            localStorage.setItem("customerData", JSON.stringify(userData));
+
+            alert("Details updated successfully!");
+            loadUserData();
+        }
+
+        function resetForm() {
+            loadUserData();
+        }
+
+        window.onload = loadUserData;
+    </script>
+
+</body>
+</html>

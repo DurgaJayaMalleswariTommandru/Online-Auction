@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Online Auction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .back-button {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    padding: 8px 16px; /* Adjust padding for better size */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Adjust font size */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    width: auto; /* Ensure the button doesn't take the full width */
+}
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        h2 {
+            background-color: #1a3d4c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+   <!-- Back Button -->
+<button class="back-button" onclick="window.location.href='sellerlogindetails.html';">Back to Page</button>
+    <div class="form-container">
+        <h2>Add Product</h2>
+
+        <label>Product Name (*)</label>
+        <input type="text" id="productName" placeholder="Enter Product Name">
+
+        <label>Product Description (*)</label>
+        <textarea id="productDescription" placeholder="Enter Product Description"></textarea>
+
+        <label>Starting Bid Price (*)</label>
+        <input type="number" id="startingPrice" placeholder="Enter Starting Bid Price">
+
+        <label>Upload Product Image (*)</label>
+        <input type="file" id="productImage">
+
+        <label>Bidding Duration (in hours) (*)</label>
+        <input type="number" id="biddingDuration" placeholder="Enter duration in hours">
+
+        <button class="btn" onclick="submitProduct()">Submit Product</button>
+    </div>
+
+    <script>
+        function submitProduct() {
+            let name = document.getElementById("productName").value.trim();
+            let desc = document.getElementById("productDescription").value.trim();
+            let price = document.getElementById("startingPrice").value.trim();
+            let image = document.getElementById("productImage").value.trim();
+            let duration = document.getElementById("biddingDuration").value.trim();
+
+            if (!name || !desc || !price || !image || !duration) {
+                alert("All fields are required!");
+                return;
+            }
+
+            let biddingTime = duration * 60 * 60 * 1000; // Convert hours to milliseconds
+            let endTime = Date.now() + biddingTime; // Current time + bidding duration
+
+            let product = {
+                name: name,
+                description: desc,
+                price: price,
+                image: image,
+                endTime: endTime // Store the bidding end time
+            };
+
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products.push(product);
+            localStorage.setItem("products", JSON.stringify(products));
+
+            alert("Product added successfully! Bidding ends in " + duration + " hours.");
+            window.location.href = "sellerlogindetails.html"; // Redirect to the items page
+        }
+    </script>
+
+</body>
+</html>
