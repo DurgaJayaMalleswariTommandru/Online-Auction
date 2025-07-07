@@ -70,7 +70,7 @@ This is a full-featured **Online Auction System** that allows **sellers** to pos
 ## 📁 Project Structure
 ```
 online-auction/
-├── frontend/
+├── project/
 │   ├── index.html
 │   ├── sellerlogin.html
 │   ├── customerlogin.html
@@ -80,7 +80,9 @@ online-auction/
 ├── backend/
 │   ├── server.js
 │   ├── models/
+│   ├──public/
 │   ├── routes/
+│   ├── middleware/
 │   ├── controllers/
 │   └── config/
 ├── .env
@@ -123,6 +125,6 @@ This project is open-source and free for educational and non-commercial use.
 ## 📬 Contact
 
 - **Developer**: Durga Jaya Malleswari Tommandru 
-- **Email**: durgatommandru@gmail.com  
+- **Email**: durgatommandru@gmail.com
 
 ---
